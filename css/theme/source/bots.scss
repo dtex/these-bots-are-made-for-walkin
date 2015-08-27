@@ -1,0 +1,108 @@
+/**
+ * Bots theme for these-bots-are-made-for-walkin
+ *
+ */
+
+
+// Default mixins and settings -----------------
+@import "../template/mixins";
+@import "../template/settings";
+// ---------------------------------------------
+
+
+// Include theme-specific fonts
+@import url(../../lib/font/fjalla/fjalla.css);
+
+
+// Override theme settings (see ../template/settings.scss)
+$backgroundColor: #efe40e;
+
+$mainColor: #000;
+$headingColor: #000;
+
+$mainFontSize: 38px;
+$mainFont: 'Fjalla', 'Source Sans Pro', Helvetica, sans-serif;
+$headingFont: 'Fjalla', 'Source Sans Pro', Helvetica, sans-serif;
+$headingTextShadow: none;
+$headingLetterSpacing: normal;
+$headingTextTransform: uppercase;
+$headingFontWeight: 600;
+$linkColor: #000;
+$linkColorHover: darken( $linkColor, 25% );
+$selectionBackgroundColor: lighten( $linkColor, 50% );
+
+$heading1Size: 2.5em;
+$heading2Size: 1.6em;
+$heading3Size: 1.3em;
+$heading4Size: 1.0em;
+
+section.has-light-background {
+	&, h1, h2, h3, h4, h5, h6 {
+		color: #222;
+	}
+}
+
+
+// Theme template ------------------------------
+@import "../template/theme";
+// ---------------------------------------------
+
+.reveal {
+
+	section img {
+		border-style: none;
+		box-shadow: none;
+	}
+
+	.icon {
+		img {
+			vertical-align: top;
+			margin-top: -11px;
+
+			&:hover {
+				box-shadow: none;
+			}
+		}
+
+		&.github img {
+			margin-top: -6px;
+			margin-left: 10px;
+		}
+	}
+
+	.animationSlide {
+		ul {
+			margin-top:100px;
+
+			li {
+				margin-bottom: 40px;
+			}
+		}
+	}
+
+	pre {
+		code {
+			max-height:465px;
+
+			&.tooMuchCode {
+				line-height: 1.5em;
+				font-size: 0.59em;
+			}
+		}
+	}
+
+	.gjgFrame {
+		height: 50vh;
+		width: 98vw;
+	}
+
+	h1.yell {
+		font-size: 7.4em;
+		line-height: 1em;
+	}
+
+}
+
+.speaker-controls-notes .value {
+	font-size: 1em;
+}

@@ -1,0 +1,540 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>These Bots are Made For Walkin&rsquot;</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/bots.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/monokai_sublime.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>These Bots Are<br/>Made For Walkin&rsquo;</h1>
+					<h3>jsconf.co October 16, 2015</h3>
+					<h4>Donovan Buck</h4>
+					<p>
+						<small><a href="https://twitter/com/dtex" class="icon twitter"><img src="img/twitter-4096-black.png" height="48" /></a>dtex</a><a href="https://gitbu.com/dtex" class="icon github"><img src="img/GitHub-Mark-120px-plus.png" height="36" /></a></small>
+					</p>
+					<aside class="notes">
+						<ul>
+							<li>JavaScript robotics. Specifically it’s about Johnny-Five</li>
+							<li>The first time I saw NodeConf in 2012.</li>
+							<li>Attended nodebotsday 2013.</li>
+							<li>I decided to build my own robot… and I wanted a walking robot.</li>
+							<li>But I discovered something…</li>
+					</aside>
+				</section>
+
+				<section>
+					<h1 class="yell">Walking<br/>Is Hard!</h1>
+					<aside class="notes">Really, really hard</aside>
+				</section>
+
+				<section>
+					<h3>DARPA Robotics Challenge</h3>
+					<video width="640" height="480" poster="img/darpaPoster.png" muted controls data-autoplay preload="none">
+    				<source src="img/darpa.mp4" type="video/mp4" />
+					</video>
+						<aside class="notes">There are two big challenges.
+							<ul>
+								<li>The robot has to maintain its balance.</li>
+								<li>This can be done with Static or Dynamic gaits</li>
+								<li>Static gaits are those where the center of gravity</li>
+								<li>Dynamic gaits are the opposite</li>
+							</ul>
+So for reasons (budget) I decided to go with a static gait. I also decided on a hexapod, thinking that it wouldn’t be hard to keep a robot with six legs upright, but it’s still an issue.
+Second challenge:</aside>
+				</section>
+
+				<section>
+					<h3>Robot Anatomy</h3>
+					<img src="img/anatomy.png" />
+					<aside class="notes">For the second challenge we need to talk about robot anatomy</aside>
+				</section>
+
+				<section>
+					<h3>Robot Anatomy</h3>
+					<img src="img/overheadanatomy.png" />
+					<aside class="notes">I thought, to make it walk all I had to do was put the end effector on the ground and turn the coxa. That gives you…</aside>
+				</section>
+
+				<section>
+					<h3>Drunk Robot</h3>
+					<img src="img/drunk.png" />
+					<aside class="notes">
+						<ul>
+							<li>End effector describes a circle around the coxa axis of rotation</li>
+							<li>Legs are working against each other</li>
+							<li>We want them to work together and move the robot forward smoothly, in a straight line.</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Sober Robot</h3>
+					<img src="img/sober.png" />
+					<aside class="notes">
+						<ul>
+							<li>To do this we have to move all three joints in concert</li>
+							<li>That’s a whole lot of stuff that needs to happen.</li>
+							<li>Is it even possible?</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<img src="img/rick.jpg" />
+					<h3>Rick Waldron</h3>
+					<h4>@rwaldron</h4>
+					<aside class="notes">
+						<ul>
+							<li>In May of 2014 Rick Waldron presented at EmpireJS</li>
+							<li>Bits of Nodebots Next</li>
+							<li>Showing some things that were possible with Johnny-Five</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<video width="640" height="480" poster="img/rickPoster.png" muted controls data-autoplay preload="none">
+    				<source src="img/RickAtEmpireJS.mp4" type="video/mp4" />
+					</video>
+					<h3>Bits of NodeBots Next</h3>
+					<aside class="notes">
+						<ul>
+							<li>12 Servos, 100fps = 9,600 commands in this 8 second clip</li>
+							<li>node.js -> Johnny Five -> Firmata -> Node Serialport -> Firmata -> Arduino</li>
+							<li>It works!</li>
+							<li>Rick had to create his animation from scratch</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section class="animationSlide">
+					<h3>Animation()</h3>
+					<ul style="float:left;">
+						<li>Timeline</li>
+						<li>Cue Points & Key Frames</li>
+						<li>Tweening</li>
+						<li>Easing Functions</li>
+					</ul>
+					<img src="img/j5.png" height="480" />
+					<aside class="notes">
+						<ul>
+							<li>Metaphors from 2D and 3D animation apps</li>
+							<li>I’m going to show some Animation code real quick.</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Using Animation()</h3>
+					<pre><code data-trim>
+var five = require("johnny-five");
+var board = new five.Board().on("ready", function() {
+
+  var right = new five.Servo(11),
+      left = new five.Servo(10);
+
+  var legs = new five.Servo.Array([right, left]);
+  var legsAnimation = new five.Animation(legs);
+
+  legsAnimation.enqueue({
+    duration: 5000,
+    easing: "inOutQuad",
+    cuePoints: [ 0, 0.25, 0.5, 0.6, 1.0],
+    keyFrames: [
+      [null, {degrees: 110}, -90, false, {degrees: 0}],
+      [null, {degrees: 90}, 20, -90, {degrees: 140}]
+    ]
+  });
+});
+    </code></pre>
+					<aside class="notes">
+						<ul>
+							<li>Require J5, Create a board</li>
+							<li>The magical handshake</li>
+							<li>Create servos. First point:</li>
+							<li>Servo array = target, Animation = timeline</li>
+							<li>Enqueue segment</li>
+							<li>Pretty easy right?</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Using Animation()</h3>
+					<pre><code data-trim class="tooMuchCode">
+keyFrames: [
+  [null, null, {degrees: s.f.c[5]}, null, null, null, null, {degrees: s.f.c[5]}, null, {degrees: s.f.c[0]}, null, null, null, null, {degrees: s.f.c[5]}], // r1c
+  [null, { step: lift.femur, easing: easeOut }, {degrees: s.f.f[5], easing: easeIn}, null, null, null, null, {degrees: s.f.f[5]}, { step: lift.femur, easing: easeOut }, {degrees: s.f.f[0], easing: easeIn}, null, null, null, null, {degrees: s.f.f[5]}],
+  [null, { step: lift.tibia, easing: easeOut }, {degrees: s.f.t[5], easing: easeIn}, null, null, null, null, {degrees: s.f.t[5]}, { step: lift.tibia, easing: easeOut }, {degrees: s.f.t[0], easing: easeIn}, null, null, null, null, {degrees: s.f.t[5]}],
+
+  [null, null, null, false, null, {degrees: s.f.c[2]}, null, {degrees: s.f.c[2]}, null, null, {degrees: s.f.c[5]}, null, {degrees: s.f.c[0]}, null, {degrees: s.f.c[2]}],
+  [null, null, null, false, { step: lift.femur, easing: easeOut }, {degrees: s.f.f[2], easing: easeIn}, null, {degrees: s.f.f[2]}, null, null, {degrees: s.f.f[5]}, { step: lift.femur, easing: easeOut }, {degrees: s.f.f[0], easing: easeIn}, null, {degrees: s.f.f[2]}],
+  [null, null, null, false, { step: lift.tibia, easing: easeOut }, {degrees: s.f.t[2], easing: easeIn}, null, {degrees: s.f.t[2]}, null, null, {degrees: s.f.t[5]}, { step: lift.tibia, easing: easeOut }, {degrees: s.f.t[0], easing: easeIn}, null, {degrees: s.f.t[2]}],
+
+  [null, null, null, null, false, null, {degrees: s.m.c[1]}, {degrees: s.m.c[1]}, null, null, null, {degrees: s.m.c[5]}, null, {degrees: s.m.c[0]}, {degrees: s.m.c[1]}],
+  [null, null, null, null, false, { step: lift.femur, easing: easeOut }, {degrees: s.m.f[1], easing: easeIn}, {degrees: s.m.f[1]}, null, null, null, {degrees: s.m.f[5]}, { step: lift.femur, easing: easeOut }, {degrees: s.m.f[0], easing: easeIn}, {degrees: s.m.f[1]}],
+  [null, null, null, null, false, { step: lift.tibia, easing: easeOut }, {degrees: s.m.t[1], easing: easeIn}, {degrees: s.m.t[1]}, null, null, null, {degrees: s.m.t[5]}, { step: lift.tibia, easing: easeOut }, {degrees: s.m.t[0], easing: easeIn}, {degrees: s.m.t[1]}],
+
+  [null, false, null, {degrees: s.m.c[4]}, null, null, null, {degrees: s.m.c[4]}, {degrees: s.m.c[5]}, null, {degrees: s.m.c[0]}, null, null, null, {degrees: s.m.c[4]}],
+  [null, false, { step: lift.femur, easing: easeOut }, {degrees: s.m.f[4], easing: easeIn}, null, null, null, {degrees: s.m.f[4]}, {degrees: s.m.f[5]}, { step: lift.femur, easing: easeOut }, {degrees: s.m.f[0], easing: easeIn}, null, null, null, {degrees: s.m.f[4]}],
+  [null, false, { step: lift.tibia, easing: easeOut }, {degrees: s.m.t[4], easing: easeIn}, null, null, null, {degrees: s.m.t[4]}, {degrees: s.m.t[5]}, { step: lift.tibia, easing: easeOut }, {degrees: s.m.t[0], easing: easeIn}, null, null, null, {degrees: s.m.t[4]}],
+
+  [null, null, false, null, {degrees: s.r.c[3]}, null, null, {degrees: s.r.c[3]}, null, {degrees: s.r.c[5]}, null, {degrees: s.r.c[0]}, {degrees: s.r.c[1]}, null, {degrees: s.r.c[3]}],
+  [null, null, false, { step: lift.femur, easing: easeOut }, {degrees: s.r.f[3], easing: easeIn}, null, null, {degrees: s.r.f[3]}, null, {degrees: s.r.f[5]}, { step: lift.femur, easing: easeOut }, {degrees: s.r.f[0], easing: easeIn}, {degrees: s.r.f[1]}, null, {degrees: s.r.f[3]}],
+  [null, null, false, { step: lift.tibia, easing: easeOut }, {degrees: s.r.t[3], easing: easeIn}, null, null, {degrees: s.r.t[3]}, null, {degrees: s.r.t[5]}, { step: lift.tibia, easing: easeOut }, {degrees: s.r.t[0], easing: easeIn}, {degrees: s.r.t[1]}, null, {degrees: s.r.t[3]}],
+
+  [null, null, null, null, null, false, null, {degrees: s.r.c[0]}, null, null, null, null, {degrees: s.r.c[5]}, null, {degrees: s.r.c[0]}],
+  [null, null, null, null, null, false, { step: lift.femur, easing: easeOut }, {degrees: s.r.f[0], easing: easeIn}, null, null, null, null, {degrees: s.r.f[5]}, { step: lift.femur, easing: easeOut }, {degrees: s.r.f[0], easing: easeIn}],
+  [null, null, null, null, null, false, { step: lift.tibia, easing: easeOut }, {degrees: s.r.t[0], easing: easeIn}, null, null, null, null, {degrees: s.r.t[5]}, { step: lift.tibia, easing: easeOut }, {degrees: s.r.t[0], easing: easeIn}]
+]
+    </code></pre>
+					<aside class="notes">
+						<ul>
+							<li>This is terrible</li>
+							<li>It's the keyframe array for a simple walking sequence</li>
+							<li>Incredibly tedious and error prone</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<video width="640" height="480" poster="img/seizurePoster.png" muted controls data-autoplay preload="none">
+    				<source src="img/seizure.mp4" type="video/mp4" />
+					</video>
+					<h4>Divide by Zero</h4>
+					<pre><code data-trim>legs.to(Infinity);</pre></code>
+					<aside class="notes">
+						<ul>
+							<li>Easy to make mistakes</li>
+							<li>Could have cost hundreds of dollars</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<img src="img/ronald.png" />
+					<h3>Ronald Jaramillo</h3>
+					<h4>@ronaldxjt</h4>
+					<aside class="notes">
+						<ul>
+							<li>Ronald Jaramillo created Go-Johnny-Go</li>
+							<li>A nice GUI for building J5 animations</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<iframe class="gjgFrame" src="http://localhost:5000/" ></iframe>
+					<h4>Go-Johnny-Go</h4>
+					<aside class="notes">
+						<ul>
+							<li>Define cuepoint</li>
+							<li>Define keyframes</li>
+							<li>Playback</li>
+							<li>Export</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<video width="640" height="480" poster="img/beautyShot.png" muted controls data-autoplay preload="none">
+    				<source src="img/goPro" type="video/mp4" />
+					</video>
+					<h4>Animation()</h4>
+					<aside class="notes">
+						<ul>
+							<li>Using a leap motion controller.</li>
+							<li>Wake, walk, turn, reverse, sleep</li>
+							<li>Pretty cool… Not cool.</li>
+							<li>Explicitly telling every limb what to do</li>
+							<li>Without regard to the robot’s environment.</li>
+							<li>Setting the angle of each servo</li>
+							<li>We are not putting our end effectors where they might actually need to be.</li>
+							<li>This is a fancy remote controlled toy</li>
+							<li>We want robots that can be aware of their environment, respond to changing conditions and do the tasks we give them in a “smart” way.</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h1>More Bits of<br/>Nodebots Next</h1>
+					<aside class="notes">
+						<ul>
+							<li>We need to be able to map the environment in more detail and at a much farther range.</li>
+							<li>We need to be able to do way finding.</li>
+							<li>First we need to be able to position our end effectors in a way that is not predetermined.</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h1>The Next Dimension</h1>
+					<aside class="notes">
+						<ul>
+							<li>Joint coordinate space</li>
+							<li>Now we’re dealing with points in global coordinate space.</li>
+							<li>Instead of a single degree value we are working with three-tuples… X,Y and Z coordinates.</li>
+							<li>Animation() handles that.</li>
+							<li>But we needed a way to position the end effectors.</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<img src="img/rockbot.jpg" />
+					<h3>Raquel V&eacute;lez</h3>
+					<h4>@rockbot</h4>
+					<aside class="notes">
+						<ul>
+							<li>Demoed Manny-The-Manipulator at JSConf in 2013.</li>
+							<li>At Manny’s heart was Vektor</li>
+							<li>A suite of linear algebra tools for helping with inverse kinematics.</li>
+							<li>What is inverse kinematics</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<video width="640" height="480" poster="img/mannyPoster.png" muted controls data-autoplay preload="none">
+    				<source src="img/MannyFK.mp4" type="video/mp4" />
+					</video>
+					<h3>Manny the Manipulator</h3>
+					<h4>Forward Kinematics</h4>
+					<aside class="notes">
+						<ul>
+							<li>We take a series of known values (our segment lengths and joint angles)</li>
+							<li>Calculate where the end effector will be.</li>
+							<li>In this example Raquel is positioning the servos, and the end effector position is being calculated.</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<video width="640" height="480" poster="img/mannyPoster.png" muted controls data-autoplay preload="none">
+    				<source src="img/MannyIK.mp4" type="video/mp4" />
+					</video>
+					<h3>Manny the Manipulator</h3>
+					<h4>Inverse Kinematics</h4>
+					<aside class="notes">
+						<ul>
+							<li>We are given the desired end effector position and joint lengths</li>
+							<li>We have to find the angles that get our end effector to that point.</li>
+							<li>In this example Raquel is dragging the end effector and the angles are being calculated.</li>
+							<li>Vector gives us tools to help solve for that. But we still needed a way to define our kinematic chains.</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<img src="img/tex-bot-small.png" width="720" />
+					<h4>Tharp</h4>
+					<aside class="notes">
+						<ul>
+							<li>A node module that allows us to define kinematic chains, systems of chains (robots).</li>
+							<li>Tharp takes in an end effector position and segment lengths then spits out servo angles.</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Using Tharp Chains</h3>
+					<pre><code data-trim>
+var r1 = new Tharp.Chain({
+  chainType: "CoxaY-FemurZ-TibiaZ",
+  origin: [4.25, 2.875, 8.15],
+  segments: { femur: 7.6125, tibia: 10.4 },
+  startAt: [11.25, 0, 12.15],
+  constructor: five.Servos,
+  actuators: [
+    { pin: 40, offset: 24, startAt: 0, range: [0, 90] },
+    { pin: 39, offset: 87, startAt: 78, range: [-80, 78] },
+    { pin: 38, offset: 165, invert: true, startAt: -140, range: [-160, -10] }
+  ]
+});
+    </code></pre>
+					<aside class="notes">
+						<ul>
+							<li>Define a kinematic chain</li>
+							<li>Select chain type, Define origin point, Set segment lengths, Set start position
+Define actuators</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Using Tharp Robots</h3>
+					<pre><code data-trim>
+var phoenix = new Tharp.Robot({
+  robotType: "hexapod",
+  chains: [r1, l1, r2, l2, r3, l3]
+});
+    </code></pre>
+					<aside class="notes">
+						<ul>
+							<li>Define a robot</li>
+							<li>Select robot type</li>
+							<li>Define chains</li>
+							<li>Now we have everything we need to set an X,Y,Z coordinate on a chain and Johnny-Five will put the end effector there.</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<video width="640" height="480" poster="img/beautyShot.png" muted controls data-autoplay preload="none">
+    				<source src="img/goPro" type="video/mp4" />
+					</video>
+					<h4>Tharp</h4>
+					<aside class="notes">
+						<ul>
+							<li>Our first movement is a “wake up” animation segment</li>
+							<li>Instead of tweening between angles we are tweening between XYZ tuples.</li>
+							<li>Show palm movement.</li>
+							<li>Now here, we are not using animation(). We have rotation about all three axes, and translation along all three axes while maintaining our end effector positions in global coordinate space.</li>
+							<li>Next steps for Tharp are support for more chain, and robot types. We also want to wrap a variety of gaits into Tharp for each robot type.</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h1>Johnny-Five<br/>is Awesome!</h1>
+					<img src="img/j5.png" height="400" />
+					<aside class="notes">
+						<ul>
+							<li>Johnny-Five is amazing.</li>
+							<li>It takes hard things and makes them incredibly easy.</li>
+							<li>Almost anyone can get up and running with robotics in an afternoon.</li>
+							<li>Connected by Default</li>
+							<li>Embeddable (Pi, T2, Edison, BBB)</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h1>The Community<br/>is Awesome!</h1>
+					<ul>
+						<li>Remarkably Diverese</li>
+						<li>International</li>
+						<li>Friendly</li>
+						<li>Accomodating</li>
+						<li>86 Contributors</li>
+						<li>You Should Join Us!</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li>Remarkably diverese team</li>
+							<li>86 Contributors/li>
+							<li>Friendly &amp; Helpful</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h1>The Future<br/>is Awesome!</h1>
+					<h4>JerryScript</h4>
+					<h4>V7</h4>
+					<aside class="notes">
+						<ul>
+							<li>As JavaScript developers our range of influence is growing</li>
+							<li>What’s expected from us will change</li>
+							<li>I promise that unless you are retiring soon you will have opportunities to build for other types of hardware</li>
+							<li>The time you spend playing with Nodebots will pay off.	</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h1>Links</h1>
+					<p><a href="http://johnny-five.io">johnny-five.io</a></p>
+					<p><a href="https://github.com/Traverso/go-johnny-go">github.com/Traverso/go-johnny-go</a></p>
+					<p><a href="https://github.com/rockbot/vektor">github.com/rockbot/vektor</a></p>
+					<p><a href="https://github.com/dtex/tharp">github.com/dtex/tharp</a></p>
+					<p>
+						<small><a href="https://twitter/com/dtex" class="icon twitter"><img src="img/twitter-4096-black.png" height="48" /></a>dtex</a><a href="https://gitbu.com/dtex" class="icon github"><img src="img/GitHub-Mark-120px-plus.png" height="36" /></a></small>
+					</p>
+					<aside class="notes">
+						<ul>
+							<li>Thanks for Listening</li>
+					</aside>
+				</section>
+
+				<section>
+					<h1>Go Be Awesome!</h1>
+					<h3><a href="http://dtex.us/jsconfco">dtex.us/jsconfco</a>
+					<p>
+						<small><a href="https://twitter/com/dtex" class="icon twitter"><img src="img/twitter-4096-black.png" height="48" /></a>dtex</a><a href="https://gitbu.com/dtex" class="icon github"><img src="img/GitHub-Mark-120px-plus.png" height="36" /></a></small>
+					</p>
+					<aside class="notes">
+						<ul>
+							<li>Thanks for Listening</li>
+					</aside>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
