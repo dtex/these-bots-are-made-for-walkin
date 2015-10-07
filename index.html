@@ -29,6 +29,7 @@
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
 		</script>
 
+
 		<!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
 		<![endif]-->
@@ -41,15 +42,12 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
+					<img src="img/tharp-banner-color.png" width="720" />
 					<h1>These Bots Are<br/>Made For Walkin&rsquo;</h1>
 					<h3>jsconf.co October 16, 2015</h3>
-					<h4>Donovan Buck</h4>
-					<p>
-						<small><a href="https://twitter/com/dtex" class="icon twitter"><img src="img/twitter-4096-black.png" height="48" /></a>dtex</a><a href="https://gitbu.com/dtex" class="icon github"><img src="img/GitHub-Mark-120px-plus.png" height="36" /></a></small>
-					</p>
 					<aside class="notes">
 						<ul>
-							<li>JavaScript robotics. Specifically it’s about Johnny-Five</li>
+							<li>JavaScript robotics. Specifically it’s about one particular way JS robots have evolved over the past couple of years</li>
 							<li>The first time I saw NodeConf in 2012.</li>
 							<li>Attended nodebotsday 2013.</li>
 							<li>I decided to build my own robot… and I wanted a walking robot.</li>
@@ -150,7 +148,7 @@ Second challenge:</aside>
 						<li>Tweening</li>
 						<li>Easing Functions</li>
 					</ul>
-					<img src="img/j5.png" height="480" />
+					<img src="img/big-bot.png" height="400" />
 					<aside class="notes">
 						<ul>
 							<li>Metaphors from 2D and 3D animation apps</li>
@@ -247,6 +245,16 @@ keyFrames: [
 				</section>
 
 				<section>
+					<img src="img/grabbers-bot.png" height="300" />
+					<h1>Less Crazy Please</h1>
+					<aside class="notes">
+						<ul>
+							<li></li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
 					<img src="img/ronald.png" />
 					<h3>Ronald Jaramillo</h3>
 					<h4>@ronaldxjt</h4>
@@ -272,9 +280,7 @@ keyFrames: [
 				</section>
 
 				<section>
-					<video width="640" height="480" poster="img/beautyShot.png" muted controls data-autoplay preload="none">
-    				<source src="img/goPro" type="video/mp4" />
-					</video>
+					<video width="640" height="480" autoplay="true" id="videoElement"></video>
 					<h4>Animation()</h4>
 					<aside class="notes">
 						<ul>
@@ -303,70 +309,72 @@ keyFrames: [
 				</section>
 
 				<section>
+					<img src="img/the-eye-bot.png" height="300" />
 					<h1>The Next Dimension</h1>
 					<aside class="notes">
 						<ul>
 							<li>Joint coordinate space</li>
-							<li>Now we’re dealing with points in global coordinate space.</li>
-							<li>Instead of a single degree value we are working with three-tuples… X,Y and Z coordinates.</li>
-							<li>Animation() handles that.</li>
-							<li>But we needed a way to position the end effectors.</li>
+							<li>Instead of a degree value for each joint we are working with three-tuples… X,Y and Z values in global coordinate space.</li>
+							<li>Much easier to reason about and absolutely necessary for interacting with the real world</li>
+							<li>Animation() handles tweening but we needed a way to position the end effectors.</li>
 						</ul>
 					</aside>
 				</section>
 
-				<section>
-					<img src="img/rockbot.jpg" />
-					<h3>Raquel V&eacute;lez</h3>
-					<h4>@rockbot</h4>
-					<aside class="notes">
-						<ul>
-							<li>Demoed Manny-The-Manipulator at JSConf in 2013.</li>
-							<li>At Manny’s heart was Vektor</li>
-							<li>A suite of linear algebra tools for helping with inverse kinematics.</li>
-							<li>What is inverse kinematics</li>
-						</ul>
-					</aside>
+				<section class="stack">
+					<section>
+						<img src="img/rockbot.jpg" />
+						<h3>Raquel V&eacute;lez</h3>
+						<h4>@rockbot</h4>
+						<aside class="notes">
+							<ul>
+								<li>Demoed Manny-The-Manipulator at JSConf in 2013.</li>
+								<li>At Manny’s heart was Vektor, a suite of linear algebra tools for helping with inverse kinematics.</li>
+								<li>A kinematic chain is a system of segments connected by joints</li>
+								<li>Inverse kinematics is the use of equations to derive the positions of all the joints in a kinematic chain given a coordinate</li>
+							</ul>
+						</aside>
+					</section>
+
+					<section>
+						<video width="640" height="480" poster="img/mannyPoster.png" muted controls data-autoplay preload="none">
+	    				<source src="img/MannyFK.mp4" type="video/mp4" />
+						</video>
+						<h3>Manny the Manipulator</h3>
+						<h4>Forward Kinematics</h4>
+						<aside class="notes">
+							<ul>
+								<li>We take a series of known values (our segment lengths and joint angles)</li>
+								<li>Calculate where the end effector will be.</li>
+								<li>In this example Raquel is positioning the servos, and the end effector position is being calculated.</li>
+							</ul>
+						</aside>
+					</section>
+
+					<section>
+						<video width="640" height="480" poster="img/mannyPoster.png" muted controls data-autoplay preload="none">
+	    				<source src="img/MannyIK.mp4" type="video/mp4" />
+						</video>
+						<h3>Manny the Manipulator</h3>
+						<h4>Inverse Kinematics</h4>
+						<aside class="notes">
+							<ul>
+								<li>We are given the desired end effector position and joint lengths</li>
+								<li>We have to find the angles that get our end effector to that point.</li>
+								<li>In this example Raquel is dragging the end effector and the angles are being calculated.</li>
+								<li>Vector gives us tools to help solve for that. But we still needed a way to define our kinematic chains.</li>
+							</ul>
+						</aside>
+					</section>
 				</section>
 
 				<section>
-					<video width="640" height="480" poster="img/mannyPoster.png" muted controls data-autoplay preload="none">
-    				<source src="img/MannyFK.mp4" type="video/mp4" />
-					</video>
-					<h3>Manny the Manipulator</h3>
-					<h4>Forward Kinematics</h4>
-					<aside class="notes">
-						<ul>
-							<li>We take a series of known values (our segment lengths and joint angles)</li>
-							<li>Calculate where the end effector will be.</li>
-							<li>In this example Raquel is positioning the servos, and the end effector position is being calculated.</li>
-						</ul>
-					</aside>
-				</section>
-
-				<section>
-					<video width="640" height="480" poster="img/mannyPoster.png" muted controls data-autoplay preload="none">
-    				<source src="img/MannyIK.mp4" type="video/mp4" />
-					</video>
-					<h3>Manny the Manipulator</h3>
-					<h4>Inverse Kinematics</h4>
-					<aside class="notes">
-						<ul>
-							<li>We are given the desired end effector position and joint lengths</li>
-							<li>We have to find the angles that get our end effector to that point.</li>
-							<li>In this example Raquel is dragging the end effector and the angles are being calculated.</li>
-							<li>Vector gives us tools to help solve for that. But we still needed a way to define our kinematic chains.</li>
-						</ul>
-					</aside>
-				</section>
-
-				<section>
-					<img src="img/tex-bot-small.png" width="720" />
+					<img src="img/tharp-banner-color.png" width="720" />
 					<h4>Tharp</h4>
 					<aside class="notes">
 						<ul>
 							<li>A node module that allows us to define kinematic chains, systems of chains (robots).</li>
-							<li>Tharp takes in an end effector position and segment lengths then spits out servo angles.</li>
+							<li>Tharp takes in an end effector position, segment lengths ands servo ranges then spits out servo angles.</li>
 						</ul>
 					</aside>
 				</section>
@@ -415,9 +423,7 @@ var phoenix = new Tharp.Robot({
 				</section>
 
 				<section>
-					<video width="640" height="480" poster="img/beautyShot.png" muted controls data-autoplay preload="none">
-    				<source src="img/goPro" type="video/mp4" />
-					</video>
+					<video width="640" height="480" autoplay="true" id="ikVideoElement"></video>
 					<h4>Tharp</h4>
 					<aside class="notes">
 						<ul>
@@ -439,7 +445,73 @@ var phoenix = new Tharp.Robot({
 							<li>It takes hard things and makes them incredibly easy.</li>
 							<li>Almost anyone can get up and running with robotics in an afternoon.</li>
 							<li>Connected by Default</li>
-							<li>Embeddable (Pi, T2, Edison, BBB)</li>
+							<li>Embeddable (Pi, Inte, Edison)</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h1>Raspberry Pi 2</h1>
+					<img src="img/Raspberry-Pi-2-side-3.jpg" height="400" />
+					<aside class="notes">
+						<ul>
+							<li>Raspberry Pi 2</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h1>Intel Edison</h1>
+					<img src="img/SparkFun_Edison_Boards-14.jpg" height="400" />
+					<aside class="notes">
+						<ul>
+							<li>Intel Edison</li>
+							<li>Includes Wi-Fi</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h1>Tessel 2</h1>
+					<img src="img/tessel2-800x600.jpg" height="400" />
+					<aside class="notes">
+						<ul>
+							<li>Tessel2</li>
+							<li>Includes Wi-Fi</li>
+							<li>Completely open source</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h1>The Future<br/>is Awesome!</h1>
+					<h4>Smaller/Cheaper embedded devices</h4>
+					<aside class="notes">
+						<ul>
+							<li>As JavaScript developers our range of influence is growing</li>
+							<li>What’s expected from us will change</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h1>Electric Imp</h1>
+					<img src="img/electricimpmakefaire04.jpg" height="400" />
+				</section>
+
+				<section data-background="img/squirrel.jpg">
+				</section>
+
+				<section>
+					<h1>JavaScript<br/>Everywhere!</h1>
+					<h4>JerryScript</h4>
+					<h4>V7</h4>
+					<aside class="notes">
+						<ul>
+							<li>Smaller javascript runtimes</li>
+							<li>Available on embedded devices</li>
+							<li>I promise that unless you are retiring soon you will have opportunities to build for other types of hardware</li>
+							<li>The time you spend playing with Nodebots will pay off.</li>
 						</ul>
 					</aside>
 				</section>
@@ -459,22 +531,23 @@ var phoenix = new Tharp.Robot({
 							<li>Remarkably diverese team</li>
 							<li>86 Contributors/li>
 							<li>Friendly &amp; Helpful</li>
+							<li>Bryan Hughes - NodeBots is one of the few areas in tech that is really focused more on the people than the tech</li>
 						</ul>
 					</aside>
 				</section>
 
 				<section>
-					<h1>The Future<br/>is Awesome!</h1>
-					<h4>JerryScript</h4>
-					<h4>V7</h4>
+					<img src="img/handstand-bot.png" height="300" />
+					<h1>Go Be Awesome!</h1>
+					<h4><a href="http://dtex.us/jsconfco">dtex.us/jsconfco</a></h4>
+					<p>
+						<small><a href="https://twitter/com/dtex" class="icon twitter"><img src="img/twitter-4096-black.png" height="48" /></a>dtex</a><a href="https://gitbu.com/dtex" class="icon github"><img src="img/GitHub-Mark-120px-plus.png" height="36" /></a></small>
+					</p>
 					<aside class="notes">
 						<ul>
-							<li>As JavaScript developers our range of influence is growing</li>
-							<li>What’s expected from us will change</li>
-							<li>I promise that unless you are retiring soon you will have opportunities to build for other types of hardware</li>
-							<li>The time you spend playing with Nodebots will pay off.	</li>
-						</ul>
+							<li>Thanks for Listening</li>
 					</aside>
+
 				</section>
 
 				<section>
@@ -483,24 +556,9 @@ var phoenix = new Tharp.Robot({
 					<p><a href="https://github.com/Traverso/go-johnny-go">github.com/Traverso/go-johnny-go</a></p>
 					<p><a href="https://github.com/rockbot/vektor">github.com/rockbot/vektor</a></p>
 					<p><a href="https://github.com/dtex/tharp">github.com/dtex/tharp</a></p>
-					<p>
-						<small><a href="https://twitter/com/dtex" class="icon twitter"><img src="img/twitter-4096-black.png" height="48" /></a>dtex</a><a href="https://gitbu.com/dtex" class="icon github"><img src="img/GitHub-Mark-120px-plus.png" height="36" /></a></small>
-					</p>
 					<aside class="notes">
 						<ul>
-							<li>Thanks for Listening</li>
-					</aside>
-				</section>
-
-				<section>
-					<h1>Go Be Awesome!</h1>
-					<h3><a href="http://dtex.us/jsconfco">dtex.us/jsconfco</a>
-					<p>
-						<small><a href="https://twitter/com/dtex" class="icon twitter"><img src="img/twitter-4096-black.png" height="48" /></a>dtex</a><a href="https://gitbu.com/dtex" class="icon github"><img src="img/GitHub-Mark-120px-plus.png" height="36" /></a></small>
-					</p>
-					<aside class="notes">
-						<ul>
-							<li>Thanks for Listening</li>
+								<li>Thanks for Listening</li>
 					</aside>
 				</section>
 
@@ -536,5 +594,24 @@ var phoenix = new Tharp.Robot({
 
 		</script>
 
+		<script>
+			var video = document.querySelector("#videoElement");
+			var ikVideo = document.querySelector("#ikVideoElement");
+
+			navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
+
+			if (navigator.getUserMedia) {
+				navigator.getUserMedia({video: true}, handleVideo, videoError);
+			}
+
+			function handleVideo(stream) {
+				video.src = window.URL.createObjectURL(stream);
+				ikVideo.src = window.URL.createObjectURL(stream);
+			}
+
+			function videoError(e) {
+			    console.log(e);
+			}
+		</script>
 	</body>
 </html>
